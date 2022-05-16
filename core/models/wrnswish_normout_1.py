@@ -163,6 +163,7 @@ class WideResNet(nn.Module):
         
         out = self.init_conv(out)
         out = self.layer(out)
+        out = self.normout(out)
         out = self.relu(self.batchnorm(out))
         out = F.avg_pool2d(out, 8)
         out = out.view(-1, self.num_channels)
