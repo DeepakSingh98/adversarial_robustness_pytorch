@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils.normout import NormOut
+from core.utils.normout import NormOut
 
 
 CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
