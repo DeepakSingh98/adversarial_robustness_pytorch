@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils.normout import NormOut
+from core.utils.normout import NormOut
 
 
 CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
@@ -138,6 +138,7 @@ class WideResNet(nn.Module):
         self.relu = activation_fn(inplace=True)
         self.logits = nn.Linear(num_channels[3], num_classes)
         self.num_channels = num_channels[3]
+        self.normout = NormOut
         
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -163,6 +164,7 @@ class WideResNet(nn.Module):
         out = self.init_conv(out)
         out = self.layer(out)
         out = self.relu(self.batchnorm(out))
+        out = self.normout(out)
         out = F.avg_pool2d(out, 8)
         out = out.view(-1, self.num_channels)
         return self.logits(out)
