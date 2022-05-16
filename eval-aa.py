@@ -31,19 +31,19 @@ from core.utils import seed
 parse = parser_eval()
 args = parse.parse_args()
 
-LOG_DIR = args.log_dir + args.desc
+LOG_DIR = args.log_dir + '/' + args.desc
 with open(LOG_DIR+'/args.txt', 'r') as f:
     old = json.load(f)
     args.__dict__ = dict(vars(args), **old)
 
 DATA_DIR = args.data_dir + args.data + '/'
-LOG_DIR = args.log_dir + args.desc
+LOG_DIR = args.log_dir + '/' + args.desc
 WEIGHTS = LOG_DIR + '/weights-best.pt'
 
 log_path = LOG_DIR + '/log-aa.log'
 logger = Logger(log_path)
 
-info = get_data_info(DATA_DIR)
+info = get_data_info('cifar10') #DATA_DIR
 BATCH_SIZE = args.batch_size
 BATCH_SIZE_VALIDATION = args.batch_size_validation
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
