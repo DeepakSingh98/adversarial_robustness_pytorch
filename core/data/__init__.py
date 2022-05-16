@@ -60,7 +60,8 @@ def load_data(data_dir, batch_size=256, batch_size_test=256, num_workers=4, use_
         unsup_fraction (float): fraction of unlabelled data per batch.
         validation (bool): if True, also returns a validation dataloader for unspervised cifar10 (as in Gowal et al, 2020).
     """
-    dataset = os.path.basename(os.path.normpath(data_dir))
+    # dataset = os.path.basename(os.path.normpath(data_dir))
+    dataset = 'cifar10'
     load_dataset_fn = _LOAD_DATASET_FN[dataset]
     
     if validation:
